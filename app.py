@@ -36,6 +36,13 @@ musicas = [
     }
 ]
 
+proximo_id = 4
+
+def busca_musica(id):
+    for m in musicas:
+        if m['id'] == id:
+            return m
+    return False
 
 @app.route('/musicas', methods=['GET'])
 def get_musicas():
@@ -45,11 +52,18 @@ def get_musicas():
 @app.route('/musicas/<indice>', methods=['GET'])
 def get_musica_indice(indice):
    i = int(indice)
-   return jsonify(musicas[i])
+   m = busca_musica(i)
+   if m:
+      return jsonify(m)
+   else:
+      return '', 404
 
 @app.route('/musicas', methods=['POST'])
 def create_musica():
+   global proximo_id
    m = request.get_json()
+   m["id"] = proximo_id
+   proximo_id += 1
    musicas.append(m)
    return '', 204 
 
