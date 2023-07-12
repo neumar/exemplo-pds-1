@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, url_for
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -16,14 +16,31 @@ def hello():
 ## especifico da app
 
 musicas = [
-    {'nome': 'Wish You Were Here', 'ano': 1975, 'artista': 'Pink Floyd'},
-    {'nome': 'Eduardo e Monica', 'ano': 1986, 'artista': 'Legiao Urbana'},
-    {'nome': 'Happy', 'ano': 2014, 'artista': 'Pharrell Williams'}
+    {
+        "id": 1,
+        "nome": "Wish You Were Here",
+        "ano": 1975,
+        "artista": "Pink Floyd"
+    },
+    {
+        "id": 2,
+        "nome": "Eduardo e Monica",
+        "ano": 1986,
+        "artista": "Legiao Urbana"
+    },
+    {
+        "id": 3,
+        "nome": "Happy",
+        "ano": 2014,
+        "artista": "Pharrell Williams"
+    }
 ]
+
 
 @app.route('/musicas', methods=['GET'])
 def get_musicas():
-   return jsonify(musicas)
+   return jsonify({"Musicas": musicas})
+
 
 @app.route('/musicas/<indice>', methods=['GET'])
 def get_musica_indice(indice):
