@@ -65,7 +65,7 @@ def create_musica():
    m["id"] = proximo_id
    proximo_id += 1
    musicas.append(m)
-   return '', 204 
+   return jsonify(m), 201 
 
 ###
 
